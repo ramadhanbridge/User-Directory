@@ -1,4 +1,4 @@
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return <div className="text-red-500">Pulse animation</div>;
 };
 export default HomePage;
