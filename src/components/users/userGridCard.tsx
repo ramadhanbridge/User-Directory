@@ -41,7 +41,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
       }}
       className="group relative flex h-62.5 w-full md:max-w-75 cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#3b6dae]/15 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#3b6dae]/40 hover:shadow-lg"
     >
-      <div className="relative h-24 shrink-0 overflow-hidden bg-gradient-to-br from-[#1a3f6b] via-[#114b98] to-[#152d4d]">
+      <div className="relative h-24 shrink-0 overflow-hidden bg-linear-to-br from-[#1a3f6b] via-[#114b98] to-[#152d4d]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.2),transparent_55%)]" />
         <div className="pointer-events-none absolute -right-6 -bottom-8 h-24 w-24 rounded-full bg-red-500/25 blur-2xl" />
 
@@ -58,7 +58,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
 
       <div className="relative flex flex-1 flex-col px-4 pt-0 pb-4">
         <div className="-mt-8 mb-3 flex justify-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-[#3b6dae] to-[#1a3f6b] text-lg font-bold text-white shadow-md transition group-hover:scale-105">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-linear-to-br from-[#3b6dae] to-[#1a3f6b] text-lg font-bold text-white shadow-md transition group-hover:scale-105">
             {initials || "?"}
           </div>
         </div>
