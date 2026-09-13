@@ -8,31 +8,12 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 import Header from "../components/Header";
-import { data } from "../db/data";
+import { useQuery } from "@tanstack/react-query";
+import { getUser, type User } from "../api/users";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
-type UserDetailProps = {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  phone: string;
-  website: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
-};
+
 
 const UserDetail = ({
   name,
@@ -42,7 +23,7 @@ const UserDetail = ({
   website,
   address,
   company,
-}: UserDetailProps) => {
+}: User) => {
   const initials = name
     .split(" ")
     .filter(Boolean)
@@ -157,10 +138,20 @@ const UserDetail = ({
 };
 
 const DetailPage = () => {
-  const { id } = useParams();
-  const user = data.find((u) => String(u.id) === id);
+  const { id } = useParams<{ id: string }>();
+  if (!id) return <div>No user id provided</div>;
+  const {
+    data: user = null,
+    isLoading,
+    error,
+  } = useQuery<User>({
+    queryKey: ["user", id],
+    queryFn: () => getUser(Number(id)),
+  });
 
-  if (!user) {
+  if (isLoading) return <Loading/>;
+  if (error) return <Error/>;
+ if (!user) {
     return (
       <div className="flex flex-col gap-6">
         <Header
