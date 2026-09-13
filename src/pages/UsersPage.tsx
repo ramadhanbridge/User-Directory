@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { FaSearch, FaThLarge, FaList } from "react-icons/fa";
 import Header from "../components/Header";
 import UserListCard from "../components/users/userListCard";
@@ -18,6 +18,7 @@ type UsersPageState = {
 };
 
 const STORAGE_KEY = "centrica.usersPage";
+const SEARCH_ANIM_DEBOUNCE_MS = 180;
 
 const defaults: UsersPageState = {
   query: "",
@@ -46,9 +47,9 @@ const loadState = (): UsersPageState => {
   }
 };
 
-
 const UsersPage = () => {
   const [{ query, sortOrder, viewMode }, setState] = useState(loadState);
+  const [animQuery, setAnimQuery] = useState(() => query.trim().toLowerCase());
 
   const {
     data: users = [],
@@ -73,10 +74,19 @@ const UsersPage = () => {
     );
   }, [query, sortOrder, viewMode]);
 
+  const normalizedQuery = query.trim().toLowerCase();
+
+  // Debounce search remounts so typing doesn't restart the animation every keystroke.
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      setAnimQuery(normalizedQuery);
+    }, SEARCH_ANIM_DEBOUNCE_MS);
+    return () => window.clearTimeout(id);
+  }, [normalizedQuery]);
+
   if (isLoading) return <Loading />;
   if (error) return <Error message={error.message} />;
 
-  const normalizedQuery = query.trim().toLowerCase();
   const visibleUsers = users
     .filter((user) => {
       if (!normalizedQuery) return true;
@@ -91,6 +101,8 @@ const UsersPage = () => {
       });
       return sortOrder === "az" ? cmp : -cmp;
     });
+
+  const resultsAnimKey = `${viewMode}|${sortOrder}|${animQuery}`;
 
   return (
     <div className="flex flex-col gap-6">
@@ -164,7 +176,7 @@ const UsersPage = () => {
 
         {/* User Data lists */}
         {visibleUsers.length === 0 ? (
-          <p className="py-12 text-center text-sm text-red-400">
+          <p className="motion-preset-fade-sm py-12 text-center text-sm text-red-400">
             No user found matching &quot;{query}&quot;.
           </p>
         ) : (
@@ -175,13 +187,23 @@ const UsersPage = () => {
                 : "flex flex-col"
             }
           >
-            {visibleUsers.map((user) =>
-              viewMode === "list" ? (
-                <UserListCard key={user.id} {...user} />
-              ) : (
-                <UserGridCard key={user.id} {...user} />
-              ),
-            )}
+            {visibleUsers.map((user, index) => (
+              <div
+                key={`${resultsAnimKey}-${user.id}`}
+                className="motion-preset-slide-up-sm"
+                style={
+                  {
+                    "--motion-delay": `${Math.min(index, 12) * 35}ms`,
+                  } as CSSProperties
+                }
+              >
+                {viewMode === "list" ? (
+                  <UserListCard {...user} />
+                ) : (
+                  <UserGridCard {...user} />
+                )}
+              </div>
+            ))}
           </div>
         )}
       </div>

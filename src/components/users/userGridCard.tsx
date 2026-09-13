@@ -41,7 +41,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
       }}
       className="group relative flex h-[250px] w-full max-w-[300px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#3b6dae]/15 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#3b6dae]/40 hover:shadow-lg"
     >
-      <div className="relative h-24 shrink-0 overflow-hidden bg-gradient-to-br from-[#1a3f6b] via-[#3b6dae] to-[#152d4d]">
+      <div className="relative h-24 shrink-0 overflow-hidden bg-gradient-to-br from-[#1a3f6b] via-[#114b98] to-[#152d4d]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.2),transparent_55%)]" />
         <div className="pointer-events-none absolute -right-6 -bottom-8 h-24 w-24 rounded-full bg-red-500/25 blur-2xl" />
 

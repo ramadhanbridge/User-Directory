@@ -103,7 +103,7 @@ const UserDetail = ({
             </div>
           </section>
 
-          <div className="h-px bg-gradient-to-r from-transparent via-[#3b6dae]/20 to-transparent" />
+          <div className="h-px bg-linear-to-r from-transparent via-[#3b6dae]/20 to-transparent" />
 
           <section>
             <h3 className="mb-3 text-xs font-semibold tracking-wider text-[#3b6dae] uppercase">
@@ -125,7 +125,7 @@ const UserDetail = ({
             </div>
           </section>
 
-          <div className="h-px bg-gradient-to-r from-transparent via-[#3b6dae]/20 to-transparent" />
+          <div className="h-px bg-linear-to-r from-transparent via-[#3b6dae]/20 to-transparent" />
 
           <section>
             <h3 className="mb-3 text-xs font-semibold tracking-wider text-[#3b6dae] uppercase">
@@ -148,7 +148,7 @@ const UserDetail = ({
 
         <div className="mt-8">
           <div className="h-0.5 w-full overflow-hidden rounded-full bg-zinc-100">
-            <div className="h-full w-full rounded-full bg-gradient-to-r from-[#3b6dae] to-red-500" />
+            <div className="h-full w-full rounded-full bg-linear-to-r from-[#3b6dae] to-red-500" />
           </div>
         </div>
       </div>
