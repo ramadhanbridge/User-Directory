@@ -22,7 +22,7 @@ const defaults: UsersPageState = {
   viewMode: "list",
 };
 
-function loadState(): UsersPageState {
+const loadState = (): UsersPageState => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaults;
@@ -41,7 +41,7 @@ function loadState(): UsersPageState {
   } catch {
     return defaults;
   }
-}
+};
 
 const users = data;
 
@@ -50,7 +50,7 @@ const UsersPage = () => {
 
   const setQuery = (value: string) =>
     setState((prev) => ({ ...prev, query: value }));
-  const setSortOrder = (value: SortOrder) =>    
+  const setSortOrder = (value: SortOrder) =>
     setState((prev) => ({ ...prev, sortOrder: value }));
   const setViewMode = (value: ViewMode) =>
     setState((prev) => ({ ...prev, viewMode: value }));
@@ -149,21 +149,27 @@ const UsersPage = () => {
         </div>
 
         {/* User Data lists */}
-        <div
-          className={
-            viewMode === "grid"
-              ? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              : "flex flex-col"
-          }
-        >
-          {visibleUsers.map((user) =>
-            viewMode === "list" ? (
-              <UserListCard key={user.id} {...user} />
-            ) : (
-              <UserGridCard key={user.id} {...user} />
-            ),
-          )}
-        </div>
+        {visibleUsers.length === 0 ? (
+          <p className="py-12 text-center text-sm text-red-400">
+            No user found matching &quot;{query}&quot;.
+          </p>
+        ) : (
+          <div
+            className={
+              viewMode === "grid"
+                ? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                : "flex flex-col"
+            }
+          >
+            {visibleUsers.map((user) =>
+              viewMode === "list" ? (
+                <UserListCard key={user.id} {...user} />
+              ) : (
+                <UserGridCard key={user.id} {...user} />
+              ),
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
