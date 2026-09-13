@@ -3,7 +3,10 @@ import { FaSearch, FaThLarge, FaList } from "react-icons/fa";
 import Header from "../components/Header";
 import UserListCard from "../components/users/userListCard";
 import UserGridCard from "../components/users/userGridCard";
-import { data } from "../db/data";
+import { useQuery } from "@tanstack/react-query";
+import { getUsers, type User } from "../api/users";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 type SortOrder = "az" | "za";
 type ViewMode = "list" | "grid";
@@ -43,10 +46,18 @@ const loadState = (): UsersPageState => {
   }
 };
 
-const users = data;
 
 const UsersPage = () => {
   const [{ query, sortOrder, viewMode }, setState] = useState(loadState);
+
+  const {
+    data: users = [],
+    isLoading,
+    error,
+  } = useQuery<User[]>({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
 
   const setQuery = (value: string) =>
     setState((prev) => ({ ...prev, query: value }));
@@ -61,6 +72,9 @@ const UsersPage = () => {
       JSON.stringify({ query, sortOrder, viewMode } satisfies UsersPageState),
     );
   }, [query, sortOrder, viewMode]);
+
+  if (isLoading) return <Loading />;
+  if (error) return <Error message={error.message} />;
 
   const normalizedQuery = query.trim().toLowerCase();
   const visibleUsers = users
