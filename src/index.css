@@ -1,2 +1,17 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+  font-family:'Poppins', sans-serif;
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
