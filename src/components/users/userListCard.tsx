@@ -44,7 +44,7 @@ const UserListCard = ({ name, email, phone, id }: UserListCardProps) => {
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div
           aria-hidden
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#3b6dae] to-[#1a3f6b] text-sm font-bold text-white"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-[#3b6dae] to-[#1a3f6b] text-sm font-bold text-white"
         >
           {initials || "?"}
         </div>
