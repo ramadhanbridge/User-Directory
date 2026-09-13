@@ -20,7 +20,7 @@ const HomePage = () => {
             </span>
           </h1>
 
-          <div className="h-1 w-16 rounded-full bg-gradient-to-r from-[#3b6dae] to-[#7eb0e8]" />
+          <div className="h-1 w-16 rounded-full bg-linear-to-r from-[#3b6dae] to-[#7eb0e8]" />
 
           <p className="text-lg md:text-xl text-white/80 max-w-md leading-relaxed">
             Your go-to platform for managing and exploring user information

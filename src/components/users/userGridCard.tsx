@@ -80,7 +80,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
 
         <div className="mt-auto pt-3 mb-2">
           <div className="h-0.5 w-full overflow-hidden rounded-full bg-zinc-100">
-            <div className="h-full w-0 rounded-full bg-gradient-to-r from-[#3b6dae] to-red-500 transition-all duration-300 group-hover:w-full" />
+            <div className="h-full w-0 rounded-full bg-linear-to-r from-[#3b6dae] to-red-500 transition-all duration-300 group-hover:w-full" />
           </div>
         </div>
       </div>

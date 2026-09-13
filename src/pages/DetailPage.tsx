@@ -51,15 +51,15 @@ const UserDetail = ({
     .join("");
 
   return (
-    <article className="mx-auto w-full  overflow-hidden rounded-2xl border border-[#3b6dae]/15 bg-white shadow-sm">
-      <div className="relative h-32 overflow-hidden bg-gradient-to-br from-[#1a3f6b] via-[#3b6dae] to-[#152d4d] md:h-40">
+    <article className="mx-auto w-full  overflow-hidden rounded-2xl border border-[#255da6]/15 bg-white shadow-sm">
+      <div className="relative h-32 overflow-hidden bg-linear-to-br from-[#1a3f6b] via-[#2b568e] to-[#152d4d] md:h-40">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.2),transparent_55%)]" />
         <div className="pointer-events-none absolute -right-6 -bottom-8 h-32 w-32 rounded-full bg-red-500/25 blur-2xl" />
       </div>
 
       <div className="relative px-6 pb-8 md:px-8">
         <div className="-mt-10 mb-4 flex justify-center md:-mt-12">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-[#3b6dae] to-[#1a3f6b] text-2xl font-bold text-white shadow-md md:h-24 md:w-24 md:text-3xl">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white bg-linear-to-br from-[#215497] to-[#1a3f6b] text-2xl font-bold text-white shadow-md md:h-24 md:w-24 md:text-3xl">
             {initials || "?"}
           </div>
         </div>
