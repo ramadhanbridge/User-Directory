@@ -22,7 +22,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
 
   const handleCopy = async (e: MouseEvent) => {
     e.stopPropagation();
-    const fullUrl = `${window.location.origin}${id}`;
+    const fullUrl = `${window.location.origin}/users/${id}`;
     await navigator.clipboard.writeText(fullUrl);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1500);
@@ -36,7 +36,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-        navigate(`/users/${id}`);
+          navigate(`/users/${id}`);
         }
       }}
       className="group relative flex h-[250px] w-full max-w-[300px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#3b6dae]/15 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#3b6dae]/40 hover:shadow-lg"

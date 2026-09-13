@@ -15,7 +15,7 @@ const UserListCard = ({ name, email, phone, id }: UserListCardProps) => {
 
   const handleCopy = async (e: MouseEvent) => {
     e.stopPropagation();
-    const fullUrl = `${window.location.origin}${id}`;
+    const fullUrl = `${window.location.origin}/users/${id}`;
     await navigator.clipboard.writeText(fullUrl);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1500);
@@ -25,11 +25,11 @@ const UserListCard = ({ name, email, phone, id }: UserListCardProps) => {
     <article
       role="link"
       tabIndex={0}
-          onClick={() => navigate(`/users/${id}`)}
+      onClick={() => navigate(`/users/${id}`)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-            navigate(`/users/${id}`)
+          navigate(`/users/${id}`);
         }
       }}
       className="group flex cursor-pointer mb-5 items-center justify-between gap-4 rounded-xl border border-[#3b6dae]/15 bg-white px-4 py-3 shadow-sm transition hover:border-[#3b6dae]/40 hover:bg-[#eef4fb]/60 hover:shadow-md"
@@ -57,11 +57,7 @@ const UserListCard = ({ name, email, phone, id }: UserListCardProps) => {
         title={copied ? "Copied!" : "Copy profile link"}
         className="shrink-0 cursor-pointer rounded-lg border border-zinc-200 bg-zinc-50 p-2.5 text-zinc-600 transition hover:border-[#3b6dae]/30 hover:bg-white hover:text-[#3b6dae]"
       >
-        {copied ? (
-          <FaCheck className="text-green-600" />
-        ) : (
-          <FaCopy />
-        )}
+        {copied ? <FaCheck className="text-green-600" /> : <FaCopy />}
       </button>
     </article>
   );
