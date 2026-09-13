@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch, FaThLarge, FaList } from "react-icons/fa";
 import Header from "../components/Header";
 import UserListCard from "../components/users/userListCard";
@@ -8,12 +8,75 @@ import { data } from "../db/data";
 type SortOrder = "az" | "za";
 type ViewMode = "list" | "grid";
 
-const users = data
+type UsersPageState = {
+  query: string;
+  sortOrder: SortOrder;
+  viewMode: ViewMode;
+};
+
+const STORAGE_KEY = "centrica.usersPage";
+
+const defaults: UsersPageState = {
+  query: "",
+  sortOrder: "az",
+  viewMode: "list",
+};
+
+function loadState(): UsersPageState {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaults;
+    const parsed = JSON.parse(raw) as Partial<UsersPageState>;
+    return {
+      query: typeof parsed.query === "string" ? parsed.query : defaults.query,
+      sortOrder:
+        parsed.sortOrder === "az" || parsed.sortOrder === "za"
+          ? parsed.sortOrder
+          : defaults.sortOrder,
+      viewMode:
+        parsed.viewMode === "list" || parsed.viewMode === "grid"
+          ? parsed.viewMode
+          : defaults.viewMode,
+    };
+  } catch {
+    return defaults;
+  }
+}
+
+const users = data;
 
 const UsersPage = () => {
-  const [query, setQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState<SortOrder>("az");
-  const [viewMode, setViewMode] = useState<ViewMode>("list");
+  const [{ query, sortOrder, viewMode }, setState] = useState(loadState);
+
+  const setQuery = (value: string) =>
+    setState((prev) => ({ ...prev, query: value }));
+  const setSortOrder = (value: SortOrder) =>    
+    setState((prev) => ({ ...prev, sortOrder: value }));
+  const setViewMode = (value: ViewMode) =>
+    setState((prev) => ({ ...prev, viewMode: value }));
+
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ query, sortOrder, viewMode } satisfies UsersPageState),
+    );
+  }, [query, sortOrder, viewMode]);
+
+  const normalizedQuery = query.trim().toLowerCase();
+  const visibleUsers = users
+    .filter((user) => {
+      if (!normalizedQuery) return true;
+      return (
+        user.name.toLowerCase().includes(normalizedQuery) ||
+        user.email.toLowerCase().includes(normalizedQuery)
+      );
+    })
+    .sort((a, b) => {
+      const cmp = a.name.localeCompare(b.name, undefined, {
+        sensitivity: "base",
+      });
+      return sortOrder === "az" ? cmp : -cmp;
+    });
 
   return (
     <div className="flex flex-col gap-6">
@@ -93,16 +156,14 @@ const UsersPage = () => {
               : "flex flex-col"
           }
         >
-          {users.map((user, index) =>
+          {visibleUsers.map((user) =>
             viewMode === "list" ? (
-              <UserListCard key={index} {...user} />
+              <UserListCard key={user.id} {...user} />
             ) : (
-              <UserGridCard key={index} {...user} />
+              <UserGridCard key={user.id} {...user} />
             ),
           )}
         </div>
-        <div>{query}</div>
-        <div>{sortOrder}</div>
       </div>
     </div>
   );

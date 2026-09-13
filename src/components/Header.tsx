@@ -20,7 +20,7 @@ const Header = ({ title, subtitle, to, toTitle }: HeaderProps) => {
       <div className="relative">
         <div
           onClick={() => navigate(to)}
-          className="mb-8 flex cursor-pointer items-center gap-2 text-red-500 transition-opacity hover:opacity-80"
+          className="mb-8 flex cursor-pointer items-center gap-2 text-[#5176a4] transition-opacity hover:opacity-80"
         >
           <button
             type="button"
@@ -33,7 +33,7 @@ const Header = ({ title, subtitle, to, toTitle }: HeaderProps) => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold text-red-500 md:text-3xl">
+          <h1 className="text-2xl font-bold text-[#5176a4] md:text-3xl">
             {title}
           </h1>
           {subtitle ? (

@@ -13,6 +13,13 @@ const UserListCard = ({ name, email, phone, id }: UserListCardProps) => {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
 
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+
   const handleCopy = async (e: MouseEvent) => {
     e.stopPropagation();
     const fullUrl = `${window.location.origin}/users/${id}`;
@@ -34,19 +41,27 @@ const UserListCard = ({ name, email, phone, id }: UserListCardProps) => {
       }}
       className="group flex cursor-pointer mb-5 items-center justify-between gap-4 rounded-xl border border-[#3b6dae]/15 bg-white px-4 py-3 shadow-sm transition hover:border-[#3b6dae]/40 hover:bg-[#eef4fb]/60 hover:shadow-md"
     >
-      <div className="min-w-0 flex-1">
-        <h3 className="truncate text-base font-semibold text-[#1a3f6b] group-hover:text-[#3b6dae]">
-          {name}
-        </h3>
-        <div className="mt-1 flex flex-col gap-1 text-sm text-zinc-600 sm:flex-row sm:gap-4">
-          <span className="flex min-w-0 items-center gap-1.5 truncate">
-            <FaEnvelope className="shrink-0 text-zinc-400" />
-            {email}
-          </span>
-          <span className="flex min-w-0 items-center gap-1.5 truncate">
-            <FaPhone className="shrink-0 text-zinc-400" />
-            {phone}
-          </span>
+      <div className="flex min-w-0 flex-1 items-center gap-3">
+        <div
+          aria-hidden
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#3b6dae] to-[#1a3f6b] text-sm font-bold text-white"
+        >
+          {initials || "?"}
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-base font-semibold text-[#1a3f6b] group-hover:text-[#3b6dae]">
+            {name}
+          </h3>
+          <div className="mt-1 flex flex-col gap-1 text-sm text-zinc-600 sm:flex-row sm:gap-4">
+            <span className="flex min-w-0 items-center gap-1.5 truncate">
+              <FaEnvelope className="shrink-0 text-zinc-400" />
+              {email}
+            </span>
+            <span className="flex min-w-0 items-center gap-1.5 truncate">
+              <FaPhone className="shrink-0 text-zinc-400" />
+              {phone}
+            </span>
+          </div>
         </div>
       </div>
 
