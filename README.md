@@ -1,75 +1,68 @@
-# React + TypeScript + Vite
+# Centrica User Directory
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A take-home web app for browsing and exploring user information across an organisation.
 
-Currently, two official plugins are available:
+**Live demo:** [centri-user.netlify.app](https://centri-user.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![App demo](./public/images/demo.png)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Landing page with navigation into the directory
+- User list with grid and list views
+- User detail pages
+- Loading and error states for remote data
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 19** + **TypeScript**
+- **Vite**
+- **React Router** for routing
+- **TanStack React Query** for remote data
+- **Tailwind CSS** for styling
+- `useState` for local UI state (view mode, etc.)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Requirements:** Node.js 18+ and npm
 
+```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd lab
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Open the URL shown in the terminal (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Other scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Command         | Description              |
+| --------------- | ------------------------ |
+| `npm run dev`   | Start the Vite dev server |
+| `npm run build` | Type-check and production build |
+| `npm run preview` | Preview the production build |
+| `npm run lint`  | Run ESLint               |
 
-```
+## State management
+
+This app is small, so local UI state uses React `useState`. Server/remote data is handled with TanStack React Query (caching, loading, and error handling).
+
+## Future improvements
+
+Given more time, I would add:
+
+1. Full CRUD for managing users
+2. Automated tests (unit and integration)
+3. Pagination or infinite scroll for larger datasets
+
+## Author
+
+**Ramadhan Nyiringondo** — [Portfolio](https://ramproto.netlify.app/)
