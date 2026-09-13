@@ -39,7 +39,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
           navigate(`/users/${id}`);
         }
       }}
-      className="group relative flex h-[250px] w-full max-w-[300px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#3b6dae]/15 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#3b6dae]/40 hover:shadow-lg"
+      className="group relative flex h-62.5 w-full md:max-w-75 cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#3b6dae]/15 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#3b6dae]/40 hover:shadow-lg"
     >
       <div className="relative h-24 shrink-0 overflow-hidden bg-gradient-to-br from-[#1a3f6b] via-[#114b98] to-[#152d4d]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.2),transparent_55%)]" />
@@ -78,7 +78,7 @@ const UserGridCard = ({ name, email, phone, id }: UserGridCardProps) => {
           </span>
         </div>
 
-        <div className="mt-auto pt-3">
+        <div className="mt-auto pt-3 mb-2">
           <div className="h-0.5 w-full overflow-hidden rounded-full bg-zinc-100">
             <div className="h-full w-0 rounded-full bg-gradient-to-r from-[#3b6dae] to-red-500 transition-all duration-300 group-hover:w-full" />
           </div>
