@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { FaSearch, FaThLarge, FaList } from "react-icons/fa";
 import Header from "../components/Header";
+import UserListCard from "../components/users/userListCard";
+import UserGridCard from "../components/users/userGridCard";
+import { data } from "../db/data";
 
 type SortOrder = "az" | "za";
 type ViewMode = "list" | "grid";
+
+const users = data
 
 const UsersPage = () => {
   const [query, setQuery] = useState("");
@@ -81,7 +86,21 @@ const UsersPage = () => {
         </div>
 
         {/* User Data lists */}
-        <div>{viewMode}</div>
+        <div
+          className={
+            viewMode === "grid"
+              ? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              : "flex flex-col"
+          }
+        >
+          {users.map((user, index) =>
+            viewMode === "list" ? (
+              <UserListCard key={index} {...user} />
+            ) : (
+              <UserGridCard key={index} {...user} />
+            ),
+          )}
+        </div>
         <div>{query}</div>
         <div>{sortOrder}</div>
       </div>
